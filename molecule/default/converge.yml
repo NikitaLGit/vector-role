@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: "Include vector"
+      include_role:
+        name: "/home/lns/git_devops/ansible_roles/vector"

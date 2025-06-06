@@ -1,4 +1,6 @@
 galaxy_info:
+  role_name: vector
+  namespace: lns
   author: Nikita Leonov
   description: This role for vector install
   company: GKU SSPK
