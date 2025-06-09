@@ -23,7 +23,7 @@
   become: true
   ansible.builtin.command:
     cmd: "dpkg -i ./vector_{{ vector_version }}-1_amd64.deb"
-  # notify: Vector | Start Vector service
+  notify: Vector | Start Vector service
   changed_when: false
   tags:
     - vector
@@ -58,7 +58,7 @@
     path: /lib/systemd/system/vector.service
     regexp: ^ExecStartPre=/usr/bin/vector validate$
     replace: ExecStartPre=/usr/bin/vector validate --config-yaml /etc/vector/vector.yaml
-  # notify: Vector | Start Vector service
+  notify: Vector | Start Vector service
 
 - name: Vector | Modify Vector.service file ExecStartPre
   become: true
@@ -67,7 +67,7 @@
     path: /lib/systemd/system/vector.service
     regexp: ^ExecStart=/usr/bin/vector$
     replace: ExecStart=/usr/bin/vector --config-yaml /etc/vector/vector.yaml
-  # notify: Vector | Start Vector service
+  notify: Vector | Start Vector service
 
 - name: Vector | Create user vector
   become: true
