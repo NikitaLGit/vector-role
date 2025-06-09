@@ -2,21 +2,24 @@
 - name: Verify
   hosts: all
   gather_facts: false
-  vars:
-    vector_config_path: /etc/vector/vector.yaml
+
   tasks:
     - name: Get Vector version
-      ansible.builtin.command: "vector --version"
+      ansible.builtin.command: vector --version
       changed_when: false
       register: vector_version
-    - name: Assert Vector instalation
-      assert:
-        that: "'{{ vector_version.rc }}' == '0'"
+      failed_when: vector_version.rc != 0
+
+    - name: Vector version ouput
+      ansible.builtin.debug:
+        var: vector_version.stdout
 
     - name: Validation Vector configuration
-      ansible.builtin.command: "vector validate --no-environment --config-yaml /etc/vector/vector.yaml"
+      ansible.builtin.command: vector validate --no-environment --config-yaml /etc/vector/vector.yaml
       changed_when: false
       register: vector_validate
-    - name: Assert Vector validate config
-      assert:
-        that: "'{{ vector_validate.rc }}' == '0'"
+      failed_when: vector_validate.rc != 0
+
+    - name: Vector configuration ouput
+      ansible.builtin.debug:
+        var: vector_validate.stdout

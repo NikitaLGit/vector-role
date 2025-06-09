@@ -2,12 +2,12 @@
 driver:
   name: docker
 platforms:
-  # - name: ubuntu2404
-  #   image: docker.io/geerlingguy/docker-ubuntu2404-ansible
+  - name: ubuntu2404
+    image: docker.io/geerlingguy/docker-ubuntu2404-ansible
   # - name: oracle
   #   image: docker.io/oraclelinux:8
-  - name: local
-    image: platforms[*].dockerfile
+  # - name: local
+  #   image: platforms[*].dockerfile
     pre_build_image: true
     tmpfs:
       - /run
@@ -33,10 +33,10 @@ scenario:
     - destroy
     - syntax
     - create
-    - prepare
+    # - prepare
     - converge
     # - idempotence
     - side_effect
     - verify
     - cleanup
-    # - destroy
+    - destroy
